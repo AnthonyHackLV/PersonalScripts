@@ -1,0 +1,70 @@
+#!/bin/bash
+
+###########################################################
+### Simple bash script to stop segmenters in med2		###
+### This will let you either stop one or all or a group	###
+###########################################################
+
+BATCH=$1
+RANGE=$2
+CHECK='^[0-9]+$'
+
+if [[ $# < 2 || "$1" == "-h" || "$1" == "-help" || "$1" == "" ]]; then
+	echo "#########################################################################"
+	echo "Simple script to stop espn segmenters in med2"
+	echo "It should be run with the following parameters: "
+	echo "/opt/bin/stopsegs <batch> <range>"
+	echo "EX: ./stopsegs true 8"
+	echo "This will stop all segs 1 through 8"
+	echo "If you want to only stop one specific segmenter"
+	echo "Run this with batch set to false"
+	echo "EX: ./stopsegs false 3"
+	echo "This will stop only the 3rd segmenter instance"
+	echo "#########################################################################"
+	exit 0
+else
+	### If the number of args are correct
+	if [[ $# == 2 ]]; then
+		### If the BATCH arg is set to true
+		if [[ $BATCH == "true" ]]; then
+			### If the RANGE arg is actually a number
+			if [[ $RANGE =~ $CHECK ]]; then
+				### Have the user confirm this is what they want to do
+				echo "You have set the batch option to true, you have the range option at $RANGE "
+				echo "you will be stopping segmenter's 1 to $RANGE is this OK [y|n]: "
+				read b_answer
+				if [[ $b_answer == "y" || $b_answer == "Y" ]]; then
+					### Cool story bro, give them an extra 10 seconds to either show they know what they are doing 
+					### or begin a RGE 
+					echo "Segmenter's will be stopped in 10 seconds, press ctrl-c to cancel"
+					sleep 10
+					for i in $(eval echo "{1..$RANGE}"); do
+						if [[ -d /opt/segmenter/med2_espn_78_2800$i/bin/ ]]; then
+							echo "/opt/segmenter/med2_espn_78_2800$i/bin/mule stop"
+							/opt/segmenter/med2_espn_78_2800$i/bin/mule stop
+						else
+							echo "/opt/segmenter/med2_espn_78_2800$i does not exist"
+						fi 
+					done
+				fi
+			fi
+		elif [[ $BATCH == "false" ]]; then
+			if [[ $RANGE =~ $CHECK ]]; then
+				echo "You have set Batch to false, "
+				echo "meaning you want to only stop one seg instance which will be Range or $RANGE is this OK [y|n]: "
+				read n_answer
+				if [[ $n_answer == "y" || $n_answer == "Y" ]]; then
+					echo "Segmenter's will be stopped in 10 seconds, press ctrl-c to cancel"
+					sleep 10
+					if [[ -d /opt/segmenter/med2_espn_78_2800$RANGE/bin/ ]]; then
+						echo "/opt/segmenter/med2_espn_78_2800$RANGE/bin/mule stop"
+						/opt/segmenter/med2_espn_78_2800$RANGE/bin/mule stop
+					else
+						echo "/opt/segmenter/med2_espn_78_2800$RANGE does not exist"
+					fi
+				fi
+			fi
+		fi
+	fi
+fi
+		
