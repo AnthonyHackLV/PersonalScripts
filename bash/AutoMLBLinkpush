@@ -17,7 +17,7 @@ if [[ "$1" == "-help" || "$1" == "-h" || "$1" == "" || $# < 6 ]]; then
 	echo "################################################################################"
 	echo "This script is to help automate the MLB Link push process."
 	echo "It should be run like below on sce28.mm3 only"
-	echo "EX. /opt/bin/AutoMLBLinkpush <Year> <Month> <DAY1> <DAY2> <DAY3 or NONE> <USER>"
+	echo "EX. /opt/bin/AutoMLBLinkpush <Year> <Month> <DAY1> <DAY2> <DAY3 or ""> <USER>"
 	echo "You will only be allowed to push the max three days at one time"
 	echo "Day 3 can be optional in case that would only leave a day gap"
 	echo "################################################################################"
@@ -28,7 +28,7 @@ else
 			echo "please run script from /opt/bin on sce28 only"
 			exit 0
 		elif [[ -d /export/home/$USER/archive_out_mlb ]]; then
-			if [[ $DAY3 == "none" || $DAY3 == "NONE" || $DAY3 == "None" ]]; then
+			if [[ -z $DAY3 ]]; then
 				### Create the .out files 
 				echo "You have Day 3 set to $DAY3, so you will only push two days worth of links"
 				echo "The days you are pushing are, $DAY1 - $DAY2"
@@ -50,7 +50,12 @@ else
 				echo "Get the amount of games from msnas101 for $DAY2"
 				D2MS101_COUNT=`ls /msnas101/mlb/mlbam/$YEAR/$MNTH/$DAY2 | grep MLB_GAME_VIDEO | grep -v _x | wc -l`
 
-
+				### COMPARING>>>>>>FSJGLSALGJSA:GHASHKGASHGDASH:H
+				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT ]]; then
+					### Push the links 
+					echo "Concating Links into one file e.g. cat $DAY1 $DAY2 > $DAY1-$DAY2.out"
+				fi
+			fi
 		fi
 	fi
 fi
