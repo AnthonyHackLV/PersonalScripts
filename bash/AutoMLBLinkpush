@@ -32,10 +32,10 @@ else
 				### Create the .out files 
 				echo "You have Day 3 set to $DAY3, so you will only push two days worth of links"
 				echo "The days you are pushing are, $DAY1 - $DAY2"
-				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY1.out"
-				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY2.out"
-				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY1.out
-				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY2.out
+				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out"
+				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out"
+				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out
+				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out
 
 				### Now we will do a wc on the newly created .out files to compare them to whats
 				### on msnas101 if they are equal, great if not cannot push have to make sure
