@@ -28,14 +28,14 @@ else
 			echo "please run script from /opt/bin on sce28 only"
 			exit 0
 		elif [[ -d /export/home/$USER/archive_out_mlb ]]; then
-			if [[ -z $DAY3 ]]; then
+			if [[ "$DAY3" == "x" || "$DAY3" == "X" ]]; then
 				### Create the .out files 
 				echo "You have Day 3 set to $DAY3, so you will only push two days worth of links"
 				echo "The days you are pushing are, $DAY1 - $DAY2"
-				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/$YEAR$MNTH$DAY1.out"
-				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/$YEAR$MNTH$DAY2.out"
-				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/$YEAR$MNTH$DAY1.out
-				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/$USER/$YEAR$MNTH$DAY2.out
+				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY1.out"
+				echo "ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY2.out"
+				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY1 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY1.out
+				ls /lsnas04/data/PROD/video/mlbam/$YEAR/$MNTH/$DAY2 | grep -v _x | grep -v MLB_VIDEO | grep -v AUDIO > /export/home/archive_out_mlb/$USER/$YEAR$MNTH$DAY2.out
 
 				### Now we will do a wc on the newly created .out files to compare them to whats
 				### on msnas101 if they are equal, great if not cannot push have to make sure
@@ -43,12 +43,16 @@ else
 				sleep 3
 				echo "Get the amount of games played on $DAY1" 
 				DAY1_COUNT=`cat /export/home/$USER/$YEAR$MNTH$DAY1.out | wc -l`
+				echo "$DAY1_COUNT"
 				echo "Get the amount of games played on $DAY2" 
 				DAY2_COUNT=`cat /export/home/$USER/$YEAR$MNTH$DAY2.out | wc -l`
+				echo "$DAY2_COUNT"
 				echo "Get the amount of games from msnas101 for $DAY1"
 				D1MS101_COUNT=`ls /msnas101/mlb/mlbam/$YEAR/$MNTH/$DAY1 | grep MLB_GAME_VIDEO | grep -v _x | wc -l`
+				echo "D1MS101_COUNT"
 				echo "Get the amount of games from msnas101 for $DAY2"
 				D2MS101_COUNT=`ls /msnas101/mlb/mlbam/$YEAR/$MNTH/$DAY2 | grep MLB_GAME_VIDEO | grep -v _x | wc -l`
+				echo "D2MS101_COUNT"
 
 				### COMPARING>>>>>>FSJGLSALGJSA:GHASHKGASHGDASH:H
 				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT ]]; then
