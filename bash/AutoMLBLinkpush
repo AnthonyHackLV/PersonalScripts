@@ -42,17 +42,17 @@ else
 				### what the differences are.
 				sleep 3
 				echo "Get the amount of games played on $DAY1" 
-				DAY1_COUNT=`cat /export/home/$USER/$YEAR$MNTH$DAY1.out | wc -l`
+				DAY1_COUNT=`cat /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out | wc -l`
 				echo "$DAY1_COUNT"
 				echo "Get the amount of games played on $DAY2" 
-				DAY2_COUNT=`cat /export/home/$USER/$YEAR$MNTH$DAY2.out | wc -l`
+				DAY2_COUNT=`cat /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out | wc -l`
 				echo "$DAY2_COUNT"
 				echo "Get the amount of games from msnas101 for $DAY1"
 				D1MS101_COUNT=`ls /msnas101/mlb/mlbam/$YEAR/$MNTH/$DAY1 | grep MLB_GAME_VIDEO | grep -v _x | wc -l`
-				echo "D1MS101_COUNT"
+				echo "$D1MS101_COUNT"
 				echo "Get the amount of games from msnas101 for $DAY2"
 				D2MS101_COUNT=`ls /msnas101/mlb/mlbam/$YEAR/$MNTH/$DAY2 | grep MLB_GAME_VIDEO | grep -v _x | wc -l`
-				echo "D2MS101_COUNT"
+				echo "$D2MS101_COUNT"
 
 				### COMPARING>>>>>>FSJGLSALGJSA:GHASHKGASHGDASH:H
 				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT ]]; then
