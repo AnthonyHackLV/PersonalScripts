@@ -57,10 +57,10 @@ else
 				### COMPARING>>>>>>FSJGLSALGJSA:GHASHKGASHGDASH:H
 				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT ]]; then
 					### Push the links 
-					echo "Concating Links into one file e.g. cat $YEAR$MNTH$DAY1.out $YEAR$MNTH$DAY2.out > $DAY1-$DAY2.out"
-					cat /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out > $DAY1-$DAY2.out
+					echo "Concating Links into one file e.g. cat $YEAR$MNTH$DAY1.out $YEAR$MNTH$DAY2.out > /export/home/$USER/archive_out_mlb/$DAY1-$DAY2.out"
+					cat /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out > /export/home/$USER/archive_out_mlb/$DAY1-$DAY2.out
 					echo "Pushing Links.... This can take some time depending on how many games there were"
-					echo `/opt/bin/mlb_link_push $DAY1-$DAY2.out` ### Might have to give the full path to the out file
+					echo `/opt/bin/mlb_link_push /export/home/$USER/archive_out_mlb/$DAY1-$DAY2.out` ### Might have to give the full path to the out file
 				else
 					### If your out file contains less or more then what's on msnas101 theres a problem
 					echo "Seems $DAY1 count $DAY1_COUNT and/or $DAY2 count $DAY2_COUNT do not match what is on /msnas101 contact Bill Zurat or another member of mm-systems"
@@ -104,10 +104,10 @@ else
 				### COMPARING>>>>>>FSJGLSALGJSA:GHASHKGASHGDASH:H
 				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT && $DAY3_COUNT == $D3MS101_COUNT ]]; then
 					### Push the links 
-					echo "Concating Links into one file e.g. cat $YEAR$MNTH$DAY1.out $YEAR$MNTH$DAY2.out $YEAR$MNTH$DAY3.out > $DAY1-$DAY3.out"
-					cat /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY3.out > $DAY1-$DAY3.out
+					echo "Concating Links into one file e.g. cat $YEAR$MNTH$DAY1.out $YEAR$MNTH$DAY2.out $YEAR$MNTH$DAY3.out > /export/home/$USER/archive_out_mlb/$DAY1-$DAY3.out"
+					cat /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY1.out /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY2.out /export/home/$USER/archive_out_mlb/$YEAR$MNTH$DAY3.out > /export/home/$USER/archive_out_mlb/$DAY1-$DAY3.out
 					echo "Pushing Links.... This can take some time depending on how many games there were"
-					echo `/opt/bin/mlb_link_push $DAY1-$DAY3.out` ### Might have to give the full path to the out file
+					echo `/opt/bin/mlb_link_push /export/home/$USER/archive_out_mlb/$DAY1-$DAY3.out` ### Might have to give the full path to the out file
 				else
 					### If your out file contains less or more then what's on msnas101 theres a problem
 					echo "Seems $DAY1 count $DAY1_COUNT and/or $DAY2 count $DAY2_COUNT and/or $DAY3 count $DAY3_COUNT do not match what is on /msnas101 contact Bill Zurat or another member of mm-systems"
