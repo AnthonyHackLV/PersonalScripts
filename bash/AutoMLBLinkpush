@@ -58,6 +58,7 @@ else
 				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT ]]; then
 					### Push the links 
 					echo "Concating Links into one file e.g. cat $DAY1 $DAY2 > $DAY1-$DAY2.out"
+					cat $DAY1 $DAY2 > $DAY1-$DAY2.out
 					echo "Pushing Links.... This can take some time depending on how many games there were"
 					echo `/opt/bin/mlb_link_push $DAY1-$DAY2.out` ### Might have to give the full path to the out file
 				else
@@ -104,6 +105,7 @@ else
 				if [[ $DAY1_COUNT == $D1MS101_COUNT && $DAY2_COUNT == $D2MS101_COUNT && $DAY3_COUNT == $D3MS101_COUNT ]]; then
 					### Push the links 
 					echo "Concating Links into one file e.g. cat $DAY1 $DAY2 $DAY3 > $DAY1-$DAY3.out"
+					cat $DAY1 $DAY2 $DAY3 > $DAY1-$DAY3.out
 					echo "Pushing Links.... This can take some time depending on how many games there were"
 					echo `/opt/bin/mlb_link_push $DAY1-$DAY3.out` ### Might have to give the full path to the out file
 				else
