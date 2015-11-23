@@ -39,3 +39,4 @@ echo "${HOSTNAME}:
           bonding_opts: \"miimon=100 mode=4 lacp_rate=1\"
       slave1: eth2
       slave2: eth6" >> /Users/hack/personalscripts/bash/ecctl24.txt
+
